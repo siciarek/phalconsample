@@ -80,6 +80,10 @@ class User extends \Application\Backend\Model\Person
     public function beforeSave()
     {
         $this->roles = json_encode($this->roles);
+    }
+
+    public function afterSave()
+    {
         $this->afterFetch();
     }
 

@@ -13,6 +13,9 @@ $messages = array(
     'contact' => 'Kontakt',
 
     'admin.dashboard' => 'Administracja',
+    'admin.registered_users_all' => 'Zarejestrowani użytkownicy',
+    'admin.registered_users_male' => 'Zarejestrowani mężczyźni',
+    'admin.registered_users_female' => 'Zarejestrowane kobiety',
 
     'user.error.access_denied' => 'Nie posiadasz uprawnień do żądanego zasobu. Podaj odpowiednie dane dostępowe lub zgłoś problem administratorowi systemu.',
     'user.error.invalid_access_data' => 'Niewłaściwe dane dostępowe.',
@@ -39,25 +42,10 @@ $messages = array(
     'user.password' => 'Hasło',
     'user.confirm_password' => 'Powtórz hasło',
 
-    'songbook.error.too_short_title' => 'Tytuł jest za krótki, minimalna ilośc znaków: %min%.',
-    'songbook.error.too_short_lyrics' => 'Tekst piosenki jest za krótki, minimalna ilośc znaków: %min%.',
-    'songbook.error.too_long_title' => 'Tytuł jest za dlugi, maksymalna ilośc znaków: %max%.',
-    'songbook.error.too_long_lyrics' => 'Tekst pioseniki jest za długi, maksymalna ilośc znaków: %max%.',
-    'songbook.error.no_title' => 'Piosenka musi posiadać tytuł.',
-    'songbook.error.no_lyrics' => 'Piosenka musi posiadać tekst.',
-
-    'songbook.writers' => 'Autorzy',
-    'songbook.genre' => 'Gatunek',
-    'songbook.lyricist' => 'sł.',
-    'songbook.composer' => 'muz.',
-    'songbook.title' => 'Tytuł',
-    'songbook.lyrics' => 'Tekst',
-    'songbook.count' => 'Śpiewnik (%count%)',
-    'songbook.add_new_song' => 'Dodaj nową piosenkę',
-    'songbook' => 'Śpiewnik',
 
     'common.error.field_is_not_supported' => 'Pole "%field%" nie jest obsługiwane.',
 
+    'common.more_info' => 'Dowiedz się więcej',
     'common.unknown' => 'Nieznany',
     'common.unknown_plural' => 'Nieznani',
     'common.not_set' => 'Nieokreślony',

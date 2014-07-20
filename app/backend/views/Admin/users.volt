@@ -5,6 +5,7 @@
     <script>
         var updateParameterUrl = '{{ url({'for':'admin.update_parameter'}) }}';
         var groupList = {{ groupList|json_encode }};
+        var roleList = {{ roleList|json_encode }};
 
         $(document).ready(function () {
 
@@ -49,7 +50,6 @@
             });
 
             $('.editable.groups').editable({
-//                mode: 'inline',
                 url: updateParameterUrl,
                 showbuttons: true,
                 placement: 'left',
@@ -67,6 +67,29 @@
                     $(resp.data).each(function(i, e){
                         data.push(e.id);
                     });
+                    return { newValue: resp.data === {} ? null : data };
+                }
+            });
+
+            $('.editable.roles').editable({
+                url: updateParameterUrl,
+                showbuttons: true,
+                placement: 'left',
+                source: roleList,
+                select2: {
+                    multiple: true,
+                    allowClear: true
+                },
+                success: function (resp, config) {
+                    if (resp.success === false) {
+                        return resp.data.join("\n");
+                    }
+                    var data = [];
+
+                    $(resp.data).each(function(i, e){
+                        data.push(e);
+                    });
+
                     return { newValue: resp.data === {} ? null : data };
                 }
             });
@@ -103,22 +126,23 @@
     <table class="table table-condensed" id="no-more-tables">
         <thead>
         <tr>
-            <th>{{ trans._('user.signed_up') }}</th>
-            <th class="center">{{ trans._('user.enabled') }}</th>
-            <th class="center">{{ trans._('user.gender') }}</th>
-            <th>{{ trans._('user.first_name') }}</th>
-            <th>{{ trans._('user.last_name') }}</th>
-            <th>{{ trans._('user.email') }}</th>
-            <th class="nowrap">{{ trans._('user.expires_at') }}</th>
-            <th>{{ trans._('user.info') }}</th>
-            <th>{{ trans._('Groups') }}</th>
+            <th>{{ 'user.signed_up'|trans }}</th>
+            <th class="center">{{ 'user.enabled'|trans }}</th>
+            <th class="center">{{ 'user.gender'|trans }}</th>
+            <th>{{ 'user.first_name'|trans }}</th>
+            <th>{{ 'user.last_name'|trans }}</th>
+            <th>{{ 'user.email'|trans }}</th>
+            <th class="nowrap">{{ 'user.expires_at'|trans }}</th>
+            <th>{{ 'user.info'|trans }}</th>
+            <th>{{ 'Groups'|trans }}</th>
+            <th>{{ 'Roles'|trans }}</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
         {% for i in page.items %}
             <tr id="user-{{ i.id }}">
-                <td class="nowrap" data-title="{{ trans._('user.signed_up') }}">{{ i.created_at|date('Y-m-d H:i') }}</td>
+                <td class="nowrap" data-title="{{ 'user.signed_up'|trans }}">{{ i.created_at|date('Y-m-d H:i') }}</td>
                 <td data-title="{{ trans._('user.enabled') }}" class="center">
                     <label>
                         <input class="flat-green" type="checkbox" {% if i.enabled %}checked{% endif %}/>
@@ -131,13 +155,20 @@
                 <td data-title="{{ trans._('user.expires_at') }}">
                     {{ xeditable_input('date', 'expires_at', i.id, i.expires_at ? (i.expires_at|date('Y-m-d')) : '') }}
                 </td>
-                <td data-title="{{ trans._('user.info') }}" class="col-md-3">{{ xeditable_input('textarea', 'info', i.id, ''~i.info) }}</td>
+                <td data-title="{{ trans._('user.info') }}">{{ xeditable_input('textarea', 'info', i.id, ''~i.info) }}</td>
                 <td class="col-md-1">
                     {% set groups = [] %}
                     {% for g in i.groups %}
                         {% set groups = groups|merge([g.id]) %}
                     {% endfor %}
                     {{ xeditable_input('select2', 'groups', i.id, groups) }}
+                </td>
+                <td class="col-md-1">
+                    {% set roles = [] %}
+                    {% for r in i.roles %}
+                        {% set roles = roles|merge([r]) %}
+                    {% endfor %}
+                    {{ xeditable_input('select2', 'roles', i.id, roles) }}
                 </td>
                 <td class="col-md-1 right">
                     <div class="btn-group">

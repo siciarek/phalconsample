@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Witaj!{% endblock %} - Siciarek Online</title>
+    <title>{% block title %}{{ app_name }}{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/redmond/jquery-ui.css"/>
 

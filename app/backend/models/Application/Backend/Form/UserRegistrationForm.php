@@ -30,7 +30,7 @@ class UserRegistrationForm extends CommonForm
     {
         // First name
 
-        $first_name = new Text('first_name', array(
+        $first_name = new Text('firstName', array(
             'maxlength' => 127,
             'required' => 'required',
         ));
@@ -58,7 +58,7 @@ class UserRegistrationForm extends CommonForm
 
         // Last name
 
-        $last_name = new Text('last_name', array(
+        $last_name = new Text('lastName', array(
             'required' => 'required',
             'maxlength' => 127,
         ));

@@ -10,7 +10,7 @@
             <form class="form-horizontal" method="post">
                 {{ form.render('csrf') }}
 
-                {% for field in [ 'first_name', 'last_name', 'email', 'password', 'confirm_password' ] %}
+                {% for field in [ 'firstName', 'lastName', 'email', 'password', 'confirm_password' ] %}
                     <div class="input-group">
                         {{ form.label(field, { 'class': 'input-group-addon' }) }}
                         {{ form.render(field, { 'class': 'form-control' }) }}

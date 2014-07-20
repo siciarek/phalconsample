@@ -18,7 +18,14 @@ class AdminController extends CommonController
      */
     public function dashboardAction()
     {
+        $stats = new \stdClass();
+        $stats->registeredUsers = new \stdClass();
+        $stats->registeredUsers->all = User::count();
+        $stats->registeredUsers->male = User::count('gender="male"');
+        $stats->registeredUsers->female = User::count('gender="female"');
 
+
+        $this->view->stats = $stats;
     }
 
     /**
@@ -58,14 +65,19 @@ class AdminController extends CommonController
         ));
 
         $this->view->page = $paginator->getPaginate($this->config->pager->length);
-        $this->view->groupList =  $this->modelsManager->createBuilder()
+        $this->view->groupList = $this->modelsManager->createBuilder()
             ->columns(array('g.id', 'g.name as text'))
             ->addFrom('Application\Backend\Entity\Group', 'g')
             ->orderBy('g.name')
             ->getQuery()
             ->execute()
-            ->toArray()
-        ;
+            ->toArray();
+
+        $this->view->roleList = array(
+            array('id' => 'ROLE_USER', 'text' => 'Użytkownik'),
+            array('id' => 'ROLE_ADMIN', 'text' => 'Administrator'),
+            array('id' => 'ROLE_SUPERADMIN', 'text' => 'Superadministrator'),
+        );
     }
 
     /**
@@ -74,7 +86,7 @@ class AdminController extends CommonController
     public function updateParameterAction()
     {
         $data = array();
-        $fields = array('enabled', 'firstName', 'lastName', 'email', 'expires_at', 'info', 'groups');
+        $fields = array('enabled', 'firstName', 'lastName', 'email', 'expires_at', 'info', 'groups', 'roles');
 
         $id = intval($this->request->getPost('pk', 'int'));
         $parameter = $this->request->getPost('name', ['trim', 'striptags', 'string', 'null']);
@@ -104,10 +116,22 @@ class AdminController extends CommonController
 
             $object = $class::findFirst($id);
 
-            if ($parameter === 'groups' and $object instanceof User) {
-                $value = is_array($value) ? $value : array_filter(array($value), function($e){ return $e !== null; });
-                $value = array_map(function($e){ return Group::findFirst($e);}, $value);
-                $object->userGroups->delete();
+            if ($object instanceof User) {
+                if ($parameter === 'groups') {
+                    $value = is_array($value) ? $value : array_filter(array($value), function ($e) {
+                        return $e !== null;
+                    });
+                    $value = array_map(function ($e) {
+                        return Group::findFirst($e);
+                    }, $value);
+                    $object->userGroups->delete();
+                }
+
+                if ($parameter === 'roles') {
+                    $value = is_array($value) ? $value : array_filter(array($value), function ($e) {
+                        return $e !== null;
+                    });
+                }
             }
 
             $object->$parameter = $value;

@@ -22,7 +22,7 @@ class DefaultController extends CommonController
 
             if ($form->isValid($_POST)) {
 
-                $user->gender = preg_match('/a$/i', $user->first_name) ? User::GENDER_FEMALE : User::GENDER_MALE;
+                $user->gender = preg_match('/a$/i', $user->firstName) ? User::GENDER_FEMALE : User::GENDER_MALE;
                 $user->password = $this->security->hash($user->password);
 
                 if ($user->save() === true) {
