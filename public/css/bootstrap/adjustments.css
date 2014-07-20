@@ -1,0 +1,390 @@
+.ui-autocomplete {
+    max-height: 358px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.editable-input textarea {
+    width: 400px;
+}
+
+.transparent {
+    opacity: 0;
+    height: 0
+}
+
+/*
+ * Project specific twitter bootstrap adjustments
+ *
+ * Bootstrap classes modifications.
+ */
+
+/*GENERAL*/
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    background-color: white;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #555555 !important;
+    font-family: 'Roboto Slab', serif;
+    line-height: 1.3;
+}
+
+h1, .h1 {
+    font-size: 32px;
+}
+
+.page-header {
+    margin-top: 0 !important;
+}
+
+.page-header h1 {
+    margin-top: 0 !important;
+}
+
+h1.tabs-page {
+    margin-top: 6px !important;
+    margin-bottom: 16px !important;
+}
+
+a.text-success {
+    color: #555555 !important;
+}
+
+.alert, div, p, blockquote, textarea {
+    line-height: 1.7em !important;
+}
+
+.alert {
+    padding-left: 32px;
+    padding-right: 32px
+}
+
+.nav-tabs > li.active {
+    font-weight: bold;
+}
+
+.navbar-brand {
+    font-family: 'Roboto Slab', serif
+}
+
+.navbar-static-top li > a {
+    padding: 15px 10px !important;
+}
+
+.navbar-static-top .dropdown-menu > li > a {
+    padding: 3px 20px !important;
+}
+
+h3 icon-plus.icon-large {
+    font-family: "Open Sans", sans-serif;
+}
+
+.nowrap {
+    white-space: nowrap !important;
+}
+
+.center {
+    text-align: center !important;
+}
+
+.left {
+    text-align: left !important;
+}
+
+.right {
+    text-align: right !important;
+}
+
+/*DIALOGS*/
+
+.modal {
+    overflow-y: auto; /* double scroll fix */
+}
+
+.modal-header {
+    border-radius: 4px 4px 0 0;
+    background-color: #357EBD !important;
+    color: white;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-footer .btn {
+    min-width: 100px !important;
+}
+
+/* FORMS */
+
+label {
+    font-weight: normal !important;
+}
+
+label.input-group-addon {
+    min-width: 80px !important;
+    width: 130px !important;
+    text-align: right;
+    vertical-align: top;
+    padding-top: 9px;
+}
+
+div.input-group {
+    width: 100%;
+    min-width: 200px;
+    margin-bottom: 10px;
+}
+
+div.input-group textarea {
+    resize: none;
+}
+
+.form-horizontal .btn-lg {
+    min-width: 120px;
+    margin-bottom: 10px !important;
+}
+
+*[class^="col-lg-"] h3:first-child {
+    margin-top: 8px !important;
+}
+
+.form-horizontal ul.errors {
+    margin-left: 134px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    vertical-align: text-bottom;
+}
+
+label[for="fos_user_registration_form_acceptTerms"],
+label[for="remember_me"] {
+    width: auto;
+    display: inline-block;
+    font-weight: normal;
+    text-align: left;
+    margin-left: 4px;
+}
+
+input[required="required"],
+select[required="required"],
+textarea[required="required"] {
+    background-color: lightgoldenrodyellow;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+table tbody td.actions {
+    min-width: 100px;
+    width: 120px;
+    max-width: 150px;
+    white-space: nowrap;
+    text-align: left;
+}
+
+table tbody td.actions button {
+    margin-right: 3px !important;
+}
+
+/* TOOLTIPS */
+
+.tooltip-inner {
+    background-color: #FFFFE1;
+    color: black;
+    white-space: normal !important;
+    border: 1px solid black;
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: black;
+}
+
+.tooltip.right .tooltip-arrow {
+    border-right-color: black;
+}
+
+.tooltip.left .tooltip-arrow {
+    border-left-color: black;
+}
+
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: black;
+}
+
+/*TABS*/
+
+.tab-pane {
+    padding: 15px !important;
+}
+
+/* TABLES */
+
+table thead th a.sortable,
+table thead th a.asc,
+table thead th a.desc {
+    text-decoration: none;
+    color: #666666;
+}
+
+table thead th a.sortable:after,
+table thead th a.asc:after,
+table thead th a.desc:after {
+    font-family: 'FontAwesome', sans-serif;
+    content: "\f0d7";
+    margin-left: 5px;
+}
+
+table thead th a.sortable:after {
+    color: #dadada;
+}
+
+table thead th a.asc:after {
+    content: "\f0d8";
+}
+
+table.table td.expand {
+    display: none;
+}
+
+/* SOURCE: http://elvery.net/demo/responsive-tables/ */
+
+@media only screen and (max-width: 800px) {
+
+    /* Force table to not be like tables anymore */
+    #no-more-tables table,
+    #no-more-tables thead,
+    #no-more-tables tbody,
+    #no-more-tables th,
+    #no-more-tables td,
+    #no-more-tables tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    #no-more-tables table td.shrink,
+    #no-more-tables thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    #no-more-tables tr {
+        border: 1px solid #ccc;
+        margin-bottom: 8px;
+    }
+
+    #no-more-tables td.expand,
+    #no-more-tables td {
+        /* Behave like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 40%;
+        white-space: normal;
+        text-align: left !important;
+        display: block !important;
+    }
+
+    #no-more-tables td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 35%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: right;
+        font-weight: bold;
+        color: #333333 !important;
+        letter-spacing: 0;
+    }
+
+    /*
+    Label the data
+    */
+    #no-more-tables td:before {
+        content: attr(data-title);
+    }
+}
+
+/* PAGINATION */
+
+.pagination > li > a {
+    color: #666666;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #666666;
+    border-color: #DDDDDD;
+    color: #FFFFFF;
+    cursor: default;
+    z-index: 2;
+}
+
+/* BADGE colors based on label styles */
+
+.badge-default {
+    background-color: #999999;
+}
+
+.badge-default[href]:hover,
+.badge-default[href]:focus {
+    background-color: #808080;
+}
+
+.badge-muted {
+    background-color: #c0c0c0;
+}
+
+.badge-primary {
+    background-color: #428bca;
+}
+
+.badge-primary[href]:hover,
+.badge-primary[href]:focus {
+    background-color: #3071a9;
+}
+
+.badge-success {
+    background-color: #5cb85c;
+}
+
+.badge-success[href]:hover,
+.badge-success[href]:focus {
+    background-color: #449d44;
+}
+
+.badge-info {
+    background-color: #5bc0de;
+}
+
+.badge-info[href]:hover,
+.badge-info[href]:focus {
+    background-color: #31b0d5;
+}
+
+.badge-warning {
+    background-color: #f0ad4e;
+}
+
+.badge-warning[href]:hover,
+.badge-warning[href]:focus {
+    background-color: #ec971f;
+}
+
+.badge-danger {
+    background-color: #d9534f;
+}
+
+.badge-danger[href]:hover,
+.badge-danger[href]:focus {
+    background-color: #c9302c;
+}

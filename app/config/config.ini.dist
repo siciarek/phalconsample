@@ -1,0 +1,25 @@
+[application]
+env   = dev
+name  = Application Name
+
+[pager]
+size = 15
+length = 10
+
+[dirs]
+cache        = "/cache"
+translations = "/config/translations"
+
+[database]
+charset  = utf8
+host     = localhost
+username = root
+password = null
+dbname   = phalcon_sample
+adapter  = mysql
+
+[session]
+table = session
+
+[security]
+rounds  = 32

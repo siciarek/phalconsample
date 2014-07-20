@@ -1,0 +1,13 @@
+{
+    "require": {
+        "imagine/imagine": "dev-master",
+        "nyholm/google-api-php-client": "dev-master",
+        "crada/phalcon-user-plugin": "@dev",
+        "phalcon/devtools": "dev-master",
+        "phalcon/incubator": "dev-master"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "dev-master",
+        "phpunit/phpunit": "3.7.*"
+    }
+}

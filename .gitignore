@@ -1,2 +1,6 @@
-/cache/
-/config/development/
+/.idea
+/app/cache/
+/vendor
+/composer.lock
+/composer.phar
+/app/config/config.ini
