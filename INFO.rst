@@ -21,10 +21,20 @@ or two
     $ git branch hotfix
     $ git checkout hotfix
 
+then send it to remote server
+
+    $ git push --set-upstream origin hotfix
+
 Delete branch
 ~~~~~~~~~~~~~
 
+local
+
     $ git branch -d hotfix
+
+remote
+
+    $ git push origin --delete hotfix
 
 Show branches
 ~~~~~~~~~~~~~
@@ -40,8 +50,18 @@ Switch to specific branch
 Show diff beetween branches
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    $ git checkout master
-    $ git merge hotfix
+Implicit diff
+
+    $ git diff master..hotfix
+
+Name and status
+
+    $ git diff --name-status master..hotfix
+
+More info
+
+    $ git diff --stat  master..hotfix
+
 
 Merge branch
 ~~~~~~~~~~~~
