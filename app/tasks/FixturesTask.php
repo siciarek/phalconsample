@@ -1,20 +1,9 @@
 <?php
 
-ini_set('display_startup_errors', 1);
-ini_set('display_errors', 1);
-error_reporting(-1);
-
-set_time_limit(0);
-ini_set('memory_limit', '512M');
-
-// required for phalcon/incubator
-include __DIR__ . "/../../vendor/autoload.php";
-
-
 use  Faker\Provider\pl_PL\Person;
 use  Faker\Provider\pl_PL\Internet;
 
-class MainTask extends \Phalcon\CLI\Task
+class FixturesTask extends \Phalcon\CLI\Task
 {
     public function mainAction()
     {
@@ -59,10 +48,10 @@ class MainTask extends \Phalcon\CLI\Task
 
         foreach ($users as $u) {
             $user = new \Application\Backend\Entity\User();
-            $user->first_name = $u[0];
-            $user->last_name = $u[1];
+            $user->firstName = $u[0];
+            $user->lastName = $u[1];
             $user->email = $u[2];
-            $user->gender = preg_match('/a$/', $user->first_name) ? 'female' : 'male';
+            $user->gender = preg_match('/a$/', $user->firstName) ? 'female' : 'male';
             $user->password = $this->security->hash('password');
 
             $user->save();

@@ -34,7 +34,7 @@
                     </p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-woman"></i>
+                    <i class="ion ion-female"></i>
                 </div>
                 <a href="#" class="small-box-footer">
                     {{ trans._('common.more_info') }} <i class="fa fa-arrow-circle-right"></i>
@@ -53,7 +53,26 @@
                     </p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-man"></i>
+                    <i class="ion ion-male"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    {{ trans._('common.more_info') }} <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-fuchsia">
+                <div class="inner">
+                    <h3>
+                        {{ stats.registeredUsers.unknown }}
+                    </h3>
+                    <p>
+                        {{ trans._('admin.registered_users_unknown') }}
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-help"></i>
                 </div>
                 <a href="#" class="small-box-footer">
                     {{ trans._('common.more_info') }} <i class="fa fa-arrow-circle-right"></i>

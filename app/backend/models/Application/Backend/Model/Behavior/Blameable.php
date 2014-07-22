@@ -15,11 +15,12 @@ class Blameable extends Behavior implements BehaviorInterface
             case 'afterDelete':
             case 'afterUpdate':
 
-                $userName = $_SESSION['user']->name;
-                $logFile = APPLICATION_PATH . '/../blameable.log';
-                $logLine = sprintf("[%s] %s %s %s(%s)\n", date('Y-m-d H:i:s'), $userName, $eventType, get_class($model), $model->id);
-                file_put_contents($logFile, $logLine, FILE_APPEND);
-
+                if (isset($_SESSION)) {
+                    $userName = $_SESSION['user']->name;
+                    $logFile = APPLICATION_PATH . '/../blameable.log';
+                    $logLine = sprintf("[%s] %s %s %s(%s)\n", date('Y-m-d H:i:s'), $userName, $eventType, get_class($model), $model->id);
+                    file_put_contents($logFile, $logLine, FILE_APPEND);
+                }
                 break;
 
             default:

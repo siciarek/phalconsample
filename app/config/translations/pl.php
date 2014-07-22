@@ -12,10 +12,18 @@ $messages = array(
     'video' => 'Video',
     'contact' => 'Kontakt',
 
+    'group.name' => 'Grupa',
+    'group.plural_name' => 'Grupy',
+
+    'role.name' => 'Rola',
+    'role.plural_name' => 'Role',
+    'role.dependencies' => 'Zależności',
+
     'admin.dashboard' => 'Administracja',
     'admin.registered_users_all' => 'Zarejestrowani użytkownicy',
     'admin.registered_users_male' => 'Zarejestrowani mężczyźni',
     'admin.registered_users_female' => 'Zarejestrowane kobiety',
+    'admin.registered_users_unknown' => 'Zarejestrowani nieznanej płci',
 
     'user.error.access_denied' => 'Nie posiadasz uprawnień do żądanego zasobu. Podaj odpowiednie dane dostępowe lub zgłoś problem administratorowi systemu.',
     'user.error.invalid_access_data' => 'Niewłaściwe dane dostępowe.',
@@ -45,6 +53,8 @@ $messages = array(
 
     'common.error.field_is_not_supported' => 'Pole "%field%" nie jest obsługiwane.',
 
+    'common.name' => 'Nazwa',
+    'common.description' => 'Opis',
     'common.more_info' => 'Dowiedz się więcej',
     'common.unknown' => 'Nieznany',
     'common.unknown_plural' => 'Nieznani',

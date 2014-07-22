@@ -31,6 +31,21 @@ class Group extends \Phalcon\Mvc\Model
         ));
     }
 
+    public function beforeSave()
+    {
+        $this->roles = json_encode($this->roles);
+    }
+
+    public function afterSave()
+    {
+        $this->afterFetch();
+    }
+
+    public function afterFetch()
+    {
+        $this->roles = json_decode($this->roles);
+    }
+
     public function validation()
     {
         $this->validate(new PresenceOf(array(

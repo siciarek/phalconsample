@@ -21,6 +21,7 @@ class SecurePlugin extends \Phalcon\Mvc\User\Plugin
 //            : new \Phalcon\Annotations\Adapter\Memory();
 
         $reader = new \Phalcon\Annotations\Adapter\Files(array('annotationsDir' => $annotationsDir));
+        $reader = new \Phalcon\Annotations\Adapter\Memory();
 
         $required = array();
         $assigned = array();

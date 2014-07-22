@@ -39,6 +39,17 @@ CREATE TABLE `user` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1024 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE `company` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `enabled` BOOLEAN NOT NULL,
+    `slug` VARCHAR(255) NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `info` TEXT NULL,
+    `created_at` DATETIME DEFAULT NULL,
+    `updated_at` DATETIME DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3072 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE `user_group` (
     `user_id` INT UNSIGNED NOT NULL,
     `group_id` INT UNSIGNED NOT NULL,
@@ -48,15 +59,14 @@ CREATE TABLE `user_group` (
     PRIMARY KEY (`user_id`, `group_id`)
 ) ENGINE=InnoDB;
 
-INSERT INTO `user` (`enabled`, `roles`, `gender`, `first_name`, `last_name`, `email`, `password`, `created_at`) VALUES
-(1, '["ROLE_USER"]', 'male', 'Jacek', 'Siciarek', 'siciarek@gmail.com', md5('HelloWorld2014'), NOW()),
-(1, '["ROLE_USER"]', 'male', 'Julian', 'Olak', 'jolak@gmail.com', md5('HelloWorld2014'), NOW()),
-(1, '["ROLE_USER"]', 'female', 'Karolina', 'Olak', 'kolak@gmail.com', md5('HelloWorld2014'), NOW()),
-(1, '["ROLE_USER"]', 'female', 'Marianna', 'Olak', 'molak@gmail.com', md5('HelloWorld2014'), NOW()),
-(1, '["ROLE_USER"]', 'male', 'Czesław', 'Olak', 'colak@gmail.com', md5('HelloWorld2014'), NOW())
+INSERT INTO `user` (`id`, `enabled`, `roles`, `gender`, `first_name`, `last_name`, `info`, `email`, `password`, `created_at`) VALUES
+(1, 1, '["ROLE_SUPERADMIN"]', 'unknown', 'User', 'System', 'System user.', 'system@enovative.pl', md5(RAND()), NOW()),
+(2, 1, '["ROLE_USER"]', 'unknown', 'User', 'Test', 'Test user.', 'system@enovative.pl', md5(RAND()), NOW()),
+(null, 1, '["ROLE_USER"]', 'male', 'Jacek', 'Siciarek', null, 'siciarek@gmail.com', md5('HelloWorld2014'), NOW())
 ;
 
 INSERT INTO `group` (`enabled`, `name`, `info`, `roles`, `created_at`) VALUES
+(1, 'Guests', 'Read only visitors.', '["ROLE_GUEST"]', NOW()),
 (1, 'Users', 'Registered users.', '["ROLE_USER"]', NOW()),
 (1, 'Editors', 'Articles editors.', '["ROLE_EDITOR"]', NOW()),
 (1, 'Reviewers', 'Articles reviewers.', '["ROLE_REVIEWER"]', NOW()),
@@ -65,9 +75,9 @@ INSERT INTO `group` (`enabled`, `name`, `info`, `roles`, `created_at`) VALUES
 ;
 
 INSERT INTO `user_group` (`user_id`, `group_id`) VALUES
-(1024, 1),
 (1024, 2),
-(1024, 4),
-(1025, 1),
-(1025, 2)
+(1024, 5),
+(1024, 6)
 ;
+
+SHOW CREATE TABLE `company`;

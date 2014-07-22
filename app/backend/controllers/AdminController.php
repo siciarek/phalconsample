@@ -23,8 +23,7 @@ class AdminController extends CommonController
         $stats->registeredUsers->all = User::count();
         $stats->registeredUsers->male = User::count('gender="male"');
         $stats->registeredUsers->female = User::count('gender="female"');
-
-
+        $stats->registeredUsers->unknown = User::count('gender="unknown"');
         $this->view->stats = $stats;
     }
 
@@ -35,7 +34,9 @@ class AdminController extends CommonController
     {
 
         $query = $this->modelsManager->createQuery("SELECT u.gender, u.firstName as name, COUNT(*) as cnt FROM Application\Backend\Entity\User u GROUP BY u.firstName ORDER BY cnt DESC");
-        $users = $query->execute();
+        $users = $query->execute(array(
+            "cache" => array("key" => "my-cache", "lifetime" => 300)
+        ));
 
         $names = array();
 
@@ -52,32 +53,63 @@ class AdminController extends CommonController
      */
     public function usersAction()
     {
-        $curr_page = intval($this->request->get('page'));
+        $currentPage = intval($this->request->get('page'));
 
         $builder = $this->modelsManager->createBuilder()
             ->addFrom('Application\Backend\Entity\User', 'u')
             ->orderBy('u.lastName ASC, u.firstName ASC');
 
-        $paginator = new \Application\Common\Paginator(array(
+        $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
             'builder' => $builder,
             'limit' => $this->config->pager->size,
-            'page' => $curr_page,
+            'page' => $currentPage,
         ));
 
-        $this->view->page = $paginator->getPaginate($this->config->pager->length);
+        $pager = new \Application\Common\Paginator\Pager(
+            $paginator,
+            array(
+                // We will use Bootstrap framework styles
+                'layoutClass' => 'Application\Common\Paginator\Pager\Layout\Bootstrap',
+                // Range window will be 5 pages
+                'rangeLength' => $this->config->pager->length,
+                // Just a string with URL mask
+                'urlMask' => '?page={%page_number}',
+                // Or something like this
+                // 'urlMask'     => sprintf(
+                //     '%s?page={%%page_number}',
+                //     $this->url->get(array(
+                //         'for'        => 'index:posts',
+                //         'controller' => 'index',
+                //         'action'     => 'index'
+                //     ))
+                // ),
+            )
+        );
+
+
+        $this->view->pager = $pager; // $paginator->getPaginate($this->config->pager->length);
         $this->view->groupList = $this->modelsManager->createBuilder()
-            ->columns(array('g.id', 'g.name as text'))
+            ->columns(array('g.id', 'g.name as text', 'g.info'))
             ->addFrom('Application\Backend\Entity\Group', 'g')
             ->orderBy('g.name')
             ->getQuery()
             ->execute()
             ->toArray();
 
+        $this->view->groups = Group::find(['order' => 'name']);
+
+//        var_dump($this->view->groups);exit;
+
         $this->view->roleList = array(
             array('id' => 'ROLE_USER', 'text' => 'Użytkownik'),
             array('id' => 'ROLE_ADMIN', 'text' => 'Administrator'),
             array('id' => 'ROLE_SUPERADMIN', 'text' => 'Superadministrator'),
         );
+
+        $yaml = new \Symfony\Component\Yaml\Yaml();
+        $roles = $yaml->parse(file_get_contents(APPLICATION_PATH . '/config/security.yml'));
+
+        $this->view->roles = $roles['security']['role_hierarchy'];
     }
 
     /**

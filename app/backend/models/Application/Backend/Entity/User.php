@@ -44,7 +44,7 @@ class User extends \Application\Backend\Model\Person
         $roles = $this->roles ? : array();
 
         foreach ($this->groups as $g) {
-            $groles = json_decode($g->roles) ? : array();
+            $groles = $g->roles ? : array();
             $roles = array_unique(array_merge($roles, $groles));
         }
 

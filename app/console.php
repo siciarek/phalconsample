@@ -1,4 +1,10 @@
 <?php
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
+
+set_time_limit(0);
+ini_set('memory_limit', '512M');
 
 use Phalcon\DI\FactoryDefault\CLI as CliDI,
     Phalcon\CLI\Console as ConsoleApp;
@@ -11,6 +17,9 @@ $di = new CliDI();
 // Define path to application directory
 defined('APPLICATION_PATH')
 || define('APPLICATION_PATH', realpath(dirname(__FILE__)));
+
+// required for phalcon/incubator
+include APPLICATION_PATH . "/../vendor/autoload.php";
 
 include_once APPLICATION_PATH . '/config/config.php';
 include_once APPLICATION_PATH . '/config/view.php';

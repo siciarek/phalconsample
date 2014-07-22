@@ -1,0 +1,8 @@
+security:
+    role_hierarchy:
+        ROLE_GUEST: [ ]
+        ROLE_USER: [ ROLE_GUEST ]
+        ROLE_ADMIN: [ ROLE_USER ]
+        ROLE_SUPERADMIN: [ ROLE_ADMIN, ROLE_EDITOR, ROLE_REVIEWER ]
+        ROLE_EDITOR: [ ROLE_USER ]
+        ROLE_REVIEWER: [ ROLE_USER ]
