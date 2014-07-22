@@ -1,7 +1,29 @@
 Useful commands
 ---------------
 
+Create model with phalcon
+=========================
+
+.. code-block:: bash
+
     vendor\phalcon\devtools\phalcon.bat model company --get-set --force --namespace=\Application\Backend\Entity --name=Company --output=app/backend/models/Application/Backend/Entity
+
+
+Show git repo history
+=====================
+
+rich
+
+.. code-block:: bash
+
+    $ git log
+
+brief
+
+.. code-block:: bash
+
+    $ git log --pretty=oneline
+
 
 Git tags support
 ================
