@@ -3,10 +3,27 @@ Useful commands
 
     vendor\phalcon\devtools\phalcon.bat model company --get-set --force --namespace=\Application\Backend\Entity --name=Company --output=app/backend/models/Application/Backend/Entity
 
+Git tags support
+================
+
+Let us assume that our release has name "v1.0.0"
+
+Create tag
+~~~~~~~~~~
+
+    $ git tag -a v1.0.0 -m "The very first release of the Application."
+
+List tags
+~~~~~~~~~
+
+    $ git tag
+
+
+
 Git branches support
 ====================
 
-Lets assume that branch is named "hotfix".
+Let us assume that branch is named "hotfix".
 
 Create branch
 ~~~~~~~~~~~~~
