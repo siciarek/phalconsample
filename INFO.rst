@@ -11,10 +11,14 @@ Let us assume that our release has name "v1.0.0"
 Create tag
 ~~~~~~~~~~
 
+.. code-block:: bash
+
     $ git tag -a v1.0.0 -m "The very first release of the Application."
 
 List tags
 ~~~~~~~~~
+
+.. code-block:: bash
 
     $ git tag
 
@@ -23,9 +27,13 @@ Remove tag
 
 local
 
+.. code-block:: bash
+
     $ git tag -d v1.0.1
 
 remote
+
+.. code-block:: bash
 
     $ git push origin :refs/tags/v1.0.1
 
@@ -42,9 +50,13 @@ Create branch
 
 Run single command
 
+.. code-block:: bash
+
     $ git checkout -b hotfix
 
 or two
+
+.. code-block:: bash
 
     $ git branch hotfix
     $ git checkout hotfix
