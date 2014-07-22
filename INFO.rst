@@ -6,7 +6,7 @@ Useful commands
 Git branches support
 ====================
 
-New branch is named "hotfix".
+Lets assume that branch is named "hotfix".
 
 Create branch
 ~~~~~~~~~~~~~
@@ -79,3 +79,8 @@ Patch branch
 
     $ git diff --no-prefix master..hotfix > diff.patch
     $ patch < diff.patch
+
+Access to branches
+~~~~~~~~~~~~~~~~~~
+
+    https://www.kernel.org/pub/software/scm/git/docs/howto/update-hook-example.txt
