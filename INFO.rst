@@ -70,19 +70,27 @@ Delete branch
 
 local
 
+.. code-block:: bash
+
     $ git branch -d hotfix
 
 remote
+
+.. code-block:: bash
 
     $ git push origin --delete hotfix
 
 Show branches
 ~~~~~~~~~~~~~
 
+.. code-block:: bash
+
     $ git branch
 
 Switch to specific branch
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
 
     $ git checkout hotfix
     $ git checkout master
@@ -92,13 +100,19 @@ Show diff beetween branches
 
 Implicit diff
 
+.. code-block:: bash
+
     $ git diff master..hotfix
 
 Name and status
 
+.. code-block:: bash
+
     $ git diff --name-status master..hotfix
 
 More info
+
+.. code-block:: bash
 
     $ git diff --stat  master..hotfix
 
@@ -106,17 +120,23 @@ More info
 Merge branch
 ~~~~~~~~~~~~
 
+.. code-block:: bash
+
     $ git checkout master
     $ git merge hotfix
 
 Undo merge branch
 ~~~~~~~~~~~~~~~~~
 
+.. code-block:: bash
+
     $ git reset --hard origin/master
 
 
 Patch branch
 ~~~~~~~~~~~~
+
+.. code-block:: bash
 
     $ git diff --no-prefix master..hotfix > diff.patch
     $ patch < diff.patch
@@ -125,3 +145,4 @@ Access to branches
 ~~~~~~~~~~~~~~~~~~
 
     https://www.kernel.org/pub/software/scm/git/docs/howto/update-hook-example.txt
+    
