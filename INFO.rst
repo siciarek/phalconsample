@@ -18,6 +18,18 @@ List tags
 
     $ git tag
 
+Remove tag
+~~~~~~~~~~
+
+local
+
+    $ git tag -d v1.0.1
+
+remote
+
+    $ git push origin :refs/tags/v1.0.1
+
+
 
 
 Git branches support
