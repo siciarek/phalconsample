@@ -63,6 +63,8 @@ or two
 
 then send it to remote server
 
+.. code-block:: bash
+
     $ git push --set-upstream origin hotfix
 
 Delete branch
@@ -145,4 +147,3 @@ Access to branches
 ~~~~~~~~~~~~~~~~~~
 
     https://www.kernel.org/pub/software/scm/git/docs/howto/update-hook-example.txt
-    
