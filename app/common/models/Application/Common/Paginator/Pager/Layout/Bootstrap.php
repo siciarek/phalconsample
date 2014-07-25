@@ -46,15 +46,14 @@ class Bootstrap extends Layout
     <div class="col-xs-12">
         <form class="navbar-form navbar-left" style="margin-top: 20px">
             <div class="form-group">
-            <input style="width:80px" value="{$this->pager->getCurrentPage()}" name="page" class="form-control" type="number"/>
+            <input style="width:80px" min="1" max="{$this->pager->getLastPage()}" value="{$this->pager->getCurrentPage()}" name="page" class="form-control" type="number"/>
             </div>
-            <input type="submit" class="btn btn-default" value="GO"/>
+            <input type="submit" class="btn btn-default btn-sm" value="GO"/>
         </form>
         %s
     </div>
 </div>
 DIV;
-
 
         $result = '<ul class="pagination pull-right">';
         $originTemplate = $this->selectedTemplate;

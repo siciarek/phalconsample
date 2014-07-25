@@ -17,13 +17,24 @@ class CompanyTask extends \Phalcon\CLI\Task
         $generator = \Faker\Factory::create('pl_PL');
 
         foreach (range(1, $limit) as $i) {
+            $name = $generator->company;
+            $initial = mb_substr($name, 1, 1, 'UTF-8');
+            $initial = mb_strtolower($initial, 'UTF-8');
+
             $c = new \Application\Backend\Entity\Company();
             $c->setEnabled(1);
-            $c->setName($generator->company);
+            $c->setName($name);
+            $c->setInitial($initial);
             $c->setInfo($generator->paragraph(2));
             $c->save();
 
             echo '.';
+
+            $r = new \Application\Backend\Entity\CompanyRevenue();
+            $r->setCompanyId($c->getId());
+            $r->setWorkersCount(rand(30, 500));
+            $r->setRevenue(sprintf('%d.%d', rand(2000, 300000), rand(0, 99)));
+            $r->save();
 
             foreach ($c->getMessages() as $m) {
                 var_dump($m->getMessage());

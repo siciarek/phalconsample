@@ -6,58 +6,6 @@ use Application\Common\ORM\Behaviors\Timestampable;
 
 class Company extends \Phalcon\Mvc\Model
 {
-    public static function getInitials() {
-
-        $phql = "SELECT DISTINCT initial FROM Application\Backend\Entity\Company ORDER BY initial ASC";
-
-        $result = \Phalcon\DI::getDefault()->get('modelsManager')->executeQuery($phql);
-        $initials = [];
-        foreach ($result as $row) {
-            $initials[$row->initial] = mb_strtoupper($row->initial, 'UTF-8');
-        }
-
-        return $initials;
-    }
-
-    public function __toString() {
-        return $this->getName()?:'';
-    }
-
-    /**
-     * Initialize method for model.
-     */
-    public function initialize()
-    {
-        $this->hasOne('id', '\Application\Backend\Entity\CompanyRevenue', 'company_id', array(
-            'alias' => 'revenue',
-            'foreignKey' => true
-        ));
-
-        $this->addBehavior(new Sluggable());
-        $this->addBehavior(new Timestampable());
-    }
-
-    public function getSource()
-    {
-        return 'company';
-    }
-
-    /**
-     * Independent Column Mapping.
-     */
-    public function columnMap()
-    {
-        return array(
-            'id' => 'id',
-            'enabled' => 'enabled',
-            'slug' => 'slug',
-            'name' => 'name',
-            'initial' => 'initial',
-            'info' => 'info',
-            'created_at' => 'created_at',
-            'updated_at' => 'updated_at'
-        );
-    }
 
     /**
      *
@@ -76,12 +24,6 @@ class Company extends \Phalcon\Mvc\Model
      * @var string
      */
     protected $name;
-
-    /**
-     *
-     * @var string
-     */
-    protected $initial;
 
     /**
      *
@@ -136,19 +78,6 @@ class Company extends \Phalcon\Mvc\Model
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Method to set the value of field initial
-     *
-     * @param string $initial
-     * @return $this
-     */
-    public function setInitial($initial)
-    {
-        $this->initial = $initial;
 
         return $this;
     }
@@ -223,16 +152,6 @@ class Company extends \Phalcon\Mvc\Model
     }
 
     /**
-     * Returns the value of field initial
-     *
-     * @return string
-     */
-    public function getInitial()
-    {
-        return $this->initial;
-    }
-
-    /**
      * Returns the value of field info
      *
      * @return string
@@ -266,6 +185,36 @@ class Company extends \Phalcon\Mvc\Model
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+    /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        $this->addBehavior(new Sluggable());
+        $this->addBehavior(new Timestampable());
+    }
+
+    public function getSource()
+    {
+        return 'company';
+    }
+
+    /**
+     * Independent Column Mapping.
+     */
+    public function columnMap()
+    {
+        return array(
+            'id' => 'id', 
+            'enabled' => 'enabled', 
+            'slug' => 'slug', 
+            'name' => 'name', 
+            'info' => 'info', 
+            'created_at' => 'created_at', 
+            'updated_at' => 'updated_at'
+        );
     }
 
 }

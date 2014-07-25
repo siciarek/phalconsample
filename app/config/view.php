@@ -12,6 +12,11 @@ class Volt extends \Phalcon\Mvc\View\Engine\Volt
         $compiler = parent::getCompiler();
 
         $compiler->addFilter('merge', 'array_merge');
+        $compiler->addFilter('split', function($resolvedArgs, $exprArgs) {
+            $a = explode(',' ,$resolvedArgs);
+            $cmd = 'explode(' . trim($a[1]) . ', ' . $a[0] .')';
+            return $cmd;
+        });
         $compiler->addFilter('trans', function($resolvedArgs, $exprArgs) {
             $a = explode(',' ,$resolvedArgs);
 

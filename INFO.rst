@@ -4,10 +4,22 @@ Useful commands
 Create model with phalcon
 =========================
 
+`my_model_name` will be camelized to `MyModelName`
+
 .. code-block:: bash
 
-    vendor\phalcon\devtools\phalcon.bat model company --get-set --force --namespace=\Application\Backend\Entity --name=Company --output=app/backend/models/Application/Backend/Entity
+    vendor\phalcon\devtools\phalcon.bat model \
+    company_revenue \
+    --force \
+    --name=company_revenue \
+    --get-set \
+    --excludefields="session_id,created_at" \
+    --namespace=Application\Backend\Entity \
+    --output=app/backend/models/Application/Backend/Entity
 
+.. code-block:: bat
+
+    vendor\phalcon\devtools\phalcon.bat model my_company_revenue --force --name=company_revenue --get-set --namespace=Application\Backend\Entity --output=app\backend\models\Application\Backend\Entity
 
 Show git repo history
 =====================

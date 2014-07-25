@@ -7,6 +7,7 @@ use Application\Backend\Entity\User;
 
 class DefaultController extends CommonController
 {
+
     /**
      * @Get("/register", name="user.registration")
      * @Post("/register", name="user.register")

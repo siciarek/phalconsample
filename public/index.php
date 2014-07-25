@@ -39,6 +39,10 @@ try {
             'backend' => array(
                 'className' => 'Application\Backend\Module',
                 'path' => APPLICATION_PATH . '/backend/Module.php',
+            ),
+            'test' => array(
+                'className' => 'Application\Test\Module',
+                'path' => APPLICATION_PATH . '/test/Module.php',
             )
         )
     );

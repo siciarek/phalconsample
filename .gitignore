@@ -1,3 +1,5 @@
+/public/aceadmin
+/public/build/coverage
 /.idea
 /app/cache/
 /vendor
@@ -6,4 +8,5 @@
 /app/config/config.ini
 *.log
 *.patch
+
 

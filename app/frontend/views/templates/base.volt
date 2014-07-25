@@ -16,8 +16,6 @@
 
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.0.2/css/bootstrap3/bootstrap-switch.min.css"/>
 
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/redmond/jquery-ui.css"/>
-
         <link rel="stylesheet" href="/css/main.css"/>
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="/favicon.ico"/>

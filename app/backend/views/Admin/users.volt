@@ -3,7 +3,7 @@
 {% block javascripts %}
     {{ super() }}
     <script>
-        var updateParameterUrl = '{{ url({'for':'admin.update_parameter'}) }}';
+        var updateParameterUrl = '{{ url({'for':'admin.update_parameter', 'model': 'User'}) }}';
         var groupList = {{ groupList|json_encode }};
         var roleList = {{ roleList|json_encode }};
 
@@ -119,7 +119,7 @@
 {% endblock %}
 
 {% block page_header %}{{ trans._('user.plural_name') }}{% endblock %}
-{% block page_subheader %}({{ pager.getTotalItems() }}){% endblock %}
+{% block page_subheader %}({{ pager.count() }}){% endblock %}
 {% block page_header_icon %}<i class="fa fa-user text-muted"></i>{% endblock %}
 {% block content %}
 

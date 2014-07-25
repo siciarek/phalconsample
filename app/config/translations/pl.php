@@ -12,6 +12,14 @@ $messages = array(
     'video' => 'Video',
     'contact' => 'Kontakt',
 
+    'company.status' => 'Status',
+    'company.company_name' => 'Nazwa',
+    'company.info' => 'Opis',
+    'company.name' => 'Firma',
+    'company.plural_name' => 'Firmy',
+
+    'company.error.no_items_found' => 'Nie znaleziono żadnych pozycji.',
+
     'group.name' => 'Grupa',
     'group.plural_name' => 'Grupy',
 

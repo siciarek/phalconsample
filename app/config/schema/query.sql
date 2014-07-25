@@ -44,11 +44,23 @@ CREATE TABLE `company` (
     `enabled` BOOLEAN NOT NULL,
     `slug` VARCHAR(255) NULL,
     `name` VARCHAR(255) NOT NULL,
+    `initial` CHAR(1) NOT NULL,
     `info` TEXT NULL,
     `created_at` DATETIME DEFAULT NULL,
     `updated_at` DATETIME DEFAULT NULL,
+    INDEX(`enabled`),
+    INDEX(`initial`),
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3072 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `company_revenue` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `company_id` INT UNSIGNED NOT NULL,
+    `workers_count` INT UNSIGNED NOT NULL,
+    `revenue` DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY fk_company_revenue_company_id (`company_id`) REFERENCES `company` (`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
 
 CREATE TABLE `user_group` (
     `user_id` INT UNSIGNED NOT NULL,
@@ -80,4 +92,4 @@ INSERT INTO `user_group` (`user_id`, `group_id`) VALUES
 (1024, 6)
 ;
 
-SHOW CREATE TABLE `company`;
+SHOW CREATE TABLE `company_revenue`\G

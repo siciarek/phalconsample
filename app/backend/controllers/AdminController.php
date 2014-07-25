@@ -1,6 +1,7 @@
 <?php
 namespace Application\Backend\Controllers;
 
+use Application\Backend\Entity\Company;
 use Phalcon\Mvc\Model\Message;
 
 use Application\Common\Controllers\CommonController;
@@ -13,6 +14,18 @@ use Application\Backend\Entity\Group;
  */
 class AdminController extends CommonController
 {
+    /**
+     * @Get("/companies", name="admin.companies")
+     */
+    public function companiesAction()
+    {
+        $builder = $this->modelsManager->createBuilder()
+            ->addFrom('Application\Backend\Entity\Company', 'c')
+            ->orderBy('c.name ASC');
+
+        $this->view->pager = $this->createPager($builder);
+    }
+
     /**
      * @Get("/", name="admin.dashboard")
      */
@@ -53,41 +66,12 @@ class AdminController extends CommonController
      */
     public function usersAction()
     {
-        $currentPage = intval($this->request->get('page'));
-
         $builder = $this->modelsManager->createBuilder()
             ->addFrom('Application\Backend\Entity\User', 'u')
             ->orderBy('u.lastName ASC, u.firstName ASC');
 
-        $paginator = new \Phalcon\Paginator\Adapter\QueryBuilder(array(
-            'builder' => $builder,
-            'limit' => $this->config->pager->size,
-            'page' => $currentPage,
-        ));
+        $this->view->pager = $this->createPager($builder);
 
-        $pager = new \Application\Common\Paginator\Pager(
-            $paginator,
-            array(
-                // We will use Bootstrap framework styles
-                'layoutClass' => 'Application\Common\Paginator\Pager\Layout\Bootstrap',
-                // Range window will be 5 pages
-                'rangeLength' => $this->config->pager->length,
-                // Just a string with URL mask
-                'urlMask' => '?page={%page_number}',
-                // Or something like this
-                // 'urlMask'     => sprintf(
-                //     '%s?page={%%page_number}',
-                //     $this->url->get(array(
-                //         'for'        => 'index:posts',
-                //         'controller' => 'index',
-                //         'action'     => 'index'
-                //     ))
-                // ),
-            )
-        );
-
-
-        $this->view->pager = $pager; // $paginator->getPaginate($this->config->pager->length);
         $this->view->groupList = $this->modelsManager->createBuilder()
             ->columns(array('g.id', 'g.name as text', 'g.info'))
             ->addFrom('Application\Backend\Entity\Group', 'g')
@@ -97,8 +81,6 @@ class AdminController extends CommonController
             ->toArray();
 
         $this->view->groups = Group::find(['order' => 'name']);
-
-//        var_dump($this->view->groups);exit;
 
         $this->view->roleList = array(
             array('id' => 'ROLE_USER', 'text' => 'Użytkownik'),
@@ -113,18 +95,20 @@ class AdminController extends CommonController
     }
 
     /**
-     * @Post("/update-parameter", name="admin.update_parameter")
+     * @Post("/{model}/update-parameter", name="admin.update_parameter")
      */
-    public function updateParameterAction()
+    public function updateParameterAction($model)
     {
         $data = array();
-        $fields = array('enabled', 'firstName', 'lastName', 'email', 'expires_at', 'info', 'groups', 'roles');
+        $fields = array(
+            'name',
+            'enabled', 'firstName', 'lastName', 'email', 'expires_at', 'info', 'groups', 'roles');
 
         $id = intval($this->request->getPost('pk', 'int'));
         $parameter = $this->request->getPost('name', ['trim', 'striptags', 'string', 'null']);
         $value = $this->request->getPost('value', ['trim', 'striptags', 'string', 'null']);
 
-        $class = 'Application\Backend\Entity\User';
+        $class = sprintf('Application\Backend\Entity\%s', $model);
 
         $object = new $class();
 
@@ -148,7 +132,7 @@ class AdminController extends CommonController
 
             $object = $class::findFirst($id);
 
-            if ($object instanceof User) {
+            if ($object instanceof User or $object instanceof Company) {
                 if ($parameter === 'groups') {
                     $value = is_array($value) ? $value : array_filter(array($value), function ($e) {
                         return $e !== null;
@@ -166,7 +150,13 @@ class AdminController extends CommonController
                 }
             }
 
-            $object->$parameter = $value;
+            $method = 'set' . ucfirst($parameter);
+            if(in_array($method, get_class_methods($class))) {
+                $object->$method($value);
+            }
+            else {
+                $object->$parameter = $value;
+            }
 
             $object->save();
         }
@@ -181,8 +171,6 @@ class AdminController extends CommonController
             return $this->sendJson($data, 'error');
         }
 
-        $data = $object->$parameter ? : '';
-
-        return $this->sendJson($data);
+        return $this->sendJson($value);
     }
 }

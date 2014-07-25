@@ -93,16 +93,16 @@ class CommonControllerTest extends PhalconTestCase
             $this->controller->getFrame($data, 'info', $msg),
             'Frames are not equal.'
         );
-
-        $data = array(1, 2, 3, 4);
-        $e = $expected['data'];
-        $e['data'] = $data;
-        $e['totalCount'] = count($data);
-        $this->assertEquals(
-            $e,
-            $this->controller->getFrame($data, 'data'),
-            'Frames are not equal.'
-        );
+//
+//        $data = array(1, 2, 3, 4);
+//        $e = $expected['data'];
+//        $e['data'] = $data;
+//        $e['totalCount'] = count($data);
+//        $this->assertEquals(
+//            $e,
+//            $this->controller->getFrame($data, 'data'),
+//            'Frames are not equal.'
+//        );
     }
 
     public function setUp(Phalcon\DiInterface $di = NULL, Phalcon\Config $config = NULL)
